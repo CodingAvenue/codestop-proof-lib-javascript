@@ -1,0 +1,17 @@
+{
+    "name": "codestop/js-proof",
+    "description": "CodeStop Proof Library for JS Course",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Jerome Suarez",
+            "email": "jerome.suarez@codingavenue.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "CodeStop\\Proof\\": "src/"
+        }
+    },
+    "require": {}
+}
