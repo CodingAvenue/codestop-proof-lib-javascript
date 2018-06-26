@@ -6,7 +6,7 @@ use CodeStop\Proof\SelectorParser\Token;
 use CodeStop\Proof\SelectorParser\TokenStream;
 use CodeStop\Proof\SelectorParser\Rule\RuleInterface;
 
-class KeywordRule implements RuleInterface
+class NodeRule implements RuleInterface
 {
     public function startToken(Token $token)
     {
@@ -25,7 +25,7 @@ class KeywordRule implements RuleInterface
 
     public function getRuleType()
     {
-        return 'keyword';
+        return 'node';
     }
 
     public function handle(TokenStream $stream)
@@ -38,7 +38,7 @@ class KeywordRule implements RuleInterface
 
         // If we're here it means we're handling the stream until we satisfy the endToken() method
 
-        $keyword = '';
+        $node = '';
         while(!$stream->isEnd()) {
             $token = $stream->getCurrentToken();
             if ($this->unexpectedToken($token)) {
@@ -49,10 +49,10 @@ class KeywordRule implements RuleInterface
                 break;
             }
 
-            $keyword .= $token->getValue();
+            $node .= $token->getValue();
             $token = $stream->getNextToken();
         }
 
-        return strtoupper($keyword);
+        return $node;
     }
 }

@@ -5,7 +5,7 @@ namespace CodeStop\Proof\SelectorParser\Transformer;
 use CodeStop\Proof\SelectorParser\Transformer\TransformerInterface;
 use CodeStop\Proof\SelectorParser\TokenStream;
 use CodeStop\Proof\SelectorParser\Rule\RuleInterface;
-use CodeStop\Proof\SelectorParser\Rule\KeywordRule;
+use CodeStop\Proof\SelectorParser\Rule\NodeRule;
 use CodeStop\Proof\SelectorParser\Rule\AttributeRule;
 
 class ArrayTransformer implements TransformerInterface
@@ -21,7 +21,7 @@ class ArrayTransformer implements TransformerInterface
 
     public function addDefaultRules()
     {
-        $this->addRule(new KeywordRule());
+        $this->addRule(new NodeRule());
         $this->addRule(new AttributeRule());
     }
 

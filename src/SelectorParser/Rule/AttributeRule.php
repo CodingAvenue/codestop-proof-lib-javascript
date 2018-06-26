@@ -8,11 +8,6 @@ use CodeStop\Proof\SelectorParser\Rule\RuleInterface;
 
 class AttributeRule implements RuleInterface
 {
-    private static $attributes = array('columns', 'value', 'operator', 'tables');
-
-    private $inKey = true;
-    private $inValue = false;
-
     public function startToken(Token $token)
     {
         return $token->getType() === 'open_square_bracket';
@@ -43,7 +38,6 @@ class AttributeRule implements RuleInterface
 
         $token = $stream->getNextToken(); //We move the cursor to the next Token ignoring the open bracket since we don't want that on the result
 
-        $attributeKey = '';
         $attributeValue = '';
         $attribute = array();
 
@@ -53,34 +47,7 @@ class AttributeRule implements RuleInterface
                 break;
             }
 
-            /**
-             * TODO - This needs to be refactored. This is UGLY AS F**K!!
-             * Basically, what we wanted to achieve in here is to get the attribute name ( columns in the 'columns="bar" ).
-             * Then get the attribute value (bar in the 'columns="bar").
-             * The trick is that the value can contain a comma separated value E.g. columns="foo, bar, baz"
-             * And a '>, <, =' characters E.g. columns="bar", value="4", operator="=" ( will match a where clause of WHERE bar = 4)
-             */
-            if ($this->inKey) {
-                if ($token->getType() == 'equal') {
-                    $this->inKey = false;
-                } elseif ($token->getType() != 'comma' && $token->getType() != 'whitespace') {
-                    $attributeKey .= $token->getValue();
-                }
-            } else {
-                if (!$this->inValue && $token->getType() == 'quote') {
-                    $this->inValue = true;
-                } else if ($token->getType() == 'quote') {
-                    $this->inValue = false;
-                    $this->inKey = true;
-
-                    $attribute[$attributeKey] = preg_split("/,\s*/", $attributeValue);
-                    $attributeKey = '';
-                    $attributeValue = '';
-                } else {
-                    $attributeValue .= $token->getValue();
-                }
-            }
-            
+            $attributeValue .= $token->getValue();            
             $token = $stream->getNextToken();
         }
 
@@ -90,6 +57,15 @@ class AttributeRule implements RuleInterface
         }
 
         $token = $stream->getNextToken(); // Move the stream cursor one more time since we don't want the next rule to check the closing bracket
+
+        $attrs = preg_split("/,\s*/", $attributeValue);
+        foreach ($attrs as $attr) {
+            list($key, $value) = explode("=", $attr);
+
+            $attrValue = preg_replace('/^(\'(.*)\'|"(.*)")$/', '$2$3', $value); // Remove the single and double quote character at the start and end of the string.
+
+            $attribute[$key] = $attrValue;
+        }
 
         return $attribute;
     }
