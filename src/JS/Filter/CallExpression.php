@@ -8,14 +8,14 @@ use CodeStop\Proof\JS\Rule\RuleFactory;
  * JS Call Expression Filter class
  */
 
-class CallExpression extends Filter implements FilterFactory
+class CallExpression extends Filter implements FilterInterface
 {
     public function getRuleClass()
     {
-        return RuleFactory::createRule($this->attributes['name'], $this->getRuleFilters());
+        return RuleFactory::createRule($this->attributes['name'], $this->getRuleFilter());
     }
 
-    public function getRuleFilters()
+    public function getRuleFilter()
     {
         $attributes = $this->attributes;
 

@@ -17,7 +17,7 @@ abstract class Rule implements RuleInterface
     public function applyRule(array $nodes)
     {
         $visitor = new Visitor($this->getRule());
-        $traverser = new Traverser();
+        $traverser = new NodeTraverser();
         $traverser->addVisitor($visitor);
         $traverser->traverse($nodes);
 

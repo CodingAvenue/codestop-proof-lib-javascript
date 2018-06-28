@@ -6,7 +6,7 @@ class Argument extends Filter implements FilterInterface
 {
     public function getRuleClass()
     {
-        return RuleFactory::createRule('argument', $this->getRuleFilters());
+        return RuleFactory::createRule('argument', $this->getRuleFilter());
     }
 
     public function getRuleFilters()

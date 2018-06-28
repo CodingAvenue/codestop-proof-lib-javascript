@@ -14,18 +14,20 @@ class NodeTraverser
 
     public function addVisitor($visitor)
     {
-        $this->visitor[] = $visitor;
+        $this->visitors[] = $visitor;
     }
 
     public function traverse(array $nodes): array
     {
         $outNodes = [];
 
+        $nodes = isset($nodes['body']) ? $nodes['body'] : $nodes;
+
         foreach ($nodes as $i => &$node) {
             foreach ($this->visitors as $visitor) {
                 $return = $visitor->enter($node);
 
-                if ($return !== null) {
+                if ($return != null) {
                     $outNodes[] = $return;
                 }
             }

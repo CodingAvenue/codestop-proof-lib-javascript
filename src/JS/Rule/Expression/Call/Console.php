@@ -1,6 +1,9 @@
 <?php
 
-namespace CodeStop\Proof\JS\Rule\CallExpression;
+namespace CodeStop\Proof\JS\Rule\Expression\Call;
+
+use CodeStop\Proof\JS\Rule\Rule;
+use CodeStop\Proof\JS\Rule\RuleInterface;
 
 /**
  * Console Rule class
@@ -14,10 +17,10 @@ class Console extends Rule implements RuleInterface
 
         return function($node) use($filter) {
             return (
-                ($node.type == 'ExpressionStatement'
-                && $node.expression.type == 'CallExpression'
-                && $node.expression.callee.object.name == 'console')
-                && (isset($filter['property']) ? ($node.expression.callee.property.name == $filter['property']) : true)
+                ($node['type'] == 'ExpressionStatement'
+                && $node['expression']['type'] == 'CallExpression'
+                && $node['expression']['callee']['object']['name'] == 'console')
+                && (isset($filter['property']) ? ($node['expression']['callee']['property']['name'] == $filter['property']) : true)
             );
         };
     }

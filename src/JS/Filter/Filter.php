@@ -16,9 +16,10 @@ abstract class Filter implements FilterInterface
         $this->attributes = $attributes;
     }
 
-    public function applytFilter(array $nodes): array
+    public function applyFilter(array $nodes): array
     {
-
+        $rule = $this->getRuleClass();
+        return $rule->applyRule($nodes);
     }
 
     abstract function getRuleClass();
