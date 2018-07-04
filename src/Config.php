@@ -4,6 +4,7 @@ namespace CodeStop\Proof;
 
 /**
  * Config class for the JS Proof library
+ * TODO - We don't need this anymore.
  */
 
 class Config

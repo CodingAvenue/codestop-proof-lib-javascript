@@ -29,13 +29,13 @@ class BinFinder
      */
     public function getBin(string $bin)
     {
-        $binary = implode(DIRECTORY_SEPARATOR, array($this->config->getBinPath(), $bin));
+        $binary = implode(DIRECTORY_SEPARATOR, array("vendor", "bin", $bin));
         if (file_exists($binary)) {
             return $binary;
         }
-        elseif (file_exists(implode(DIRECTORY_SEPARATOR, array(__DIR__, "../vendor/bin", $bin)))) {
+        elseif (file_exists(implode(DIRECTORY_SEPARATOR, array(__DIR__, "..", "vendor", "bin", $bin)))) {
             // We're not part of a composer installation and we need to call OUR binaries. Should only be used by eval-runner for now
-            return implode(DIRECTORY_SEPARATOR, array(__DIR__, "../vendor/bin", $bin));
+            return implode(DIRECTORY_SEPARATOR, array(__DIR__, "..", "vendor", "bin", $bin));
         }
 
         throw new \Exception("Unknown binary {$bin}.");

@@ -26,14 +26,14 @@ class Argument extends Rule implements RuleInterface
                 && (
                     isset($filter['name'])
                         ? !is_null($index)
-                            ? $node['expression']['arguments'][$index]['name'] == $filter['name']
+                            ? strtolower($node['expression']['arguments'][$index]['name']) == strtolower($filter['name'])
                             : false
                         : true
                 )
                 && (
                     isset($filter['value'])
                         ? !is_null($index)
-                            ? $node['expression']['arguments'][$index]['value'] == $filter['name']
+                            ? strtolower($node['expression']['arguments'][$index]['value']) == strtolower($filter['name'])
                             : false
                         : true
                 )
@@ -49,7 +49,7 @@ class Argument extends Rule implements RuleInterface
             $foundIndex = null;
 
             foreach ($node['expression']['arguments'] as $index => $arg) {
-                if (strtolower($arg['type']) == $type) {
+                if (strtolower($arg['type']) == strtolower($type)) {
                     $foundIndex = $index;
                     break;
                 }
