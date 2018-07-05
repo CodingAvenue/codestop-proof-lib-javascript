@@ -11,7 +11,7 @@ class Variable extends Filter implements FilterInterface
         return RuleFactory::createRule('variable', $this->getRuleFilter());
     }
 
-    public function getRuleFilters()
+    public function getRuleFilter()
     {
         return $this->attributes;
     }
