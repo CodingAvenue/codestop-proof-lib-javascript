@@ -29,7 +29,7 @@ class FilterFactory
         return array(
             'call-expression'   => '\CodeStop\Proof\JS\Filter\CallExpression',
             'variable'          => '\CodeStop\Proof\JS\Filter\Variable',
-            'argument'          => '\CodeStop\Proof\JS\Filter\Arugment'
+            'argument'          => '\CodeStop\Proof\JS\Filter\Argument'
         );
     }
 }
