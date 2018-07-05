@@ -10,7 +10,7 @@ class Variable extends Rule implements RuleInterface
         $getIndex = $this->getIndentifierIndex();
 
         return function($node) use ($filter, $getIndex) {
-            $index = call_user_func($getIndex($node));
+            $index = call_user_func($getIndex, $node);
 
             return (
                 ($node['type'] == "VariableDeclaration"

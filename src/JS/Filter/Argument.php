@@ -13,6 +13,6 @@ class Argument extends Filter implements FilterInterface
 
     public function getRuleFilter()
     {
-        $this->attributes;
+        return $this->attributes;
     } 
 }

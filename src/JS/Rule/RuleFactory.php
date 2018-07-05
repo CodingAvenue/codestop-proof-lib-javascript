@@ -22,7 +22,7 @@ class RuleFactory
         return array(
             'console'   => '\CodeStop\Proof\JS\Rule\Expression\Call\Console',
             'variable'  => '\CodeStop\Proof\JS\Rule\Variable\Variable',
-            'argument'  => '\CodeStop\Proof\JS\Rule\Argument\Arugment'
+            'argument'  => '\CodeStop\Proof\JS\Rule\Argument\Argument'
         );
     }
 }
