@@ -22,6 +22,11 @@ abstract class Filter implements FilterInterface
         return $rule->applyRule($nodes);
     }
 
+    public function subNodes(): array
+    {
+        return array();
+    }
+
     abstract function getRuleClass();
 
     abstract function getRuleFilter();

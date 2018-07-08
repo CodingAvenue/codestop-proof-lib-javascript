@@ -58,13 +58,10 @@ class AttributeRule implements RuleInterface
 
         $token = $stream->getNextToken(); // Move the stream cursor one more time since we don't want the next rule to check the closing bracket
 
-        $attrs = preg_split("/,\s*/", $attributeValue);
-        foreach ($attrs as $attr) {
-            list($key, $value) = explode("=", $attr);
-
-            $attrValue = preg_replace('/^(\'(.*)\'|"(.*)")$/', '$2$3', $value); // Remove the single and double quote character at the start and end of the string.
-
-            $attribute[$key] = $attrValue;
+        preg_match_all("#(\w+)=([\"'])([^\"']+)\2#", $attributeValue, $attrs);
+        //$attrs = preg_split("/,\s*/", $attributeValue);
+        foreach ($attrs[1] as $index => $key) {
+            $attribute[$key] = $attrs[3][$index];
         }
 
         return $attribute;

@@ -41,4 +41,19 @@ class Nodes
         $transformer = new ArrayTransformer($stream);
         return $transformer->transform();
     }
+
+    public function getSubNode(string $subNode)
+    {
+        if (array_key_exists($subNode, $this->parsed)) {
+            return new self([$this->parsed[$subNode]]);
+        } else {
+            foreach ($this->parsed as $node) {
+                if (array_key_exists($subNode, $node)) {
+                    return new self([$node[$subNode]]);
+                }
+            }
+        }
+
+        throw new \Exception("Cannot find a subnode $subNode");
+    }
 }

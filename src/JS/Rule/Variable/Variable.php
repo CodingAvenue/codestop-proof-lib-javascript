@@ -16,6 +16,16 @@ class Variable extends Rule implements RuleInterface
                 ($node['type'] == "VariableDeclaration"
                 && (!is_null($index)))
                 && (isset($filter['kind']) ? $node['kind'] === $filter['kind'] : true)
+                && (
+                    isset($filter['initType'])
+                        ? strtolower($node['declarations'][$index]['init']['type']) === strtolower($filter['initType'])
+                        : true
+                )
+                && (
+                    isset($filter['initValue'])
+                        ? strtolower($node['declarations'][$index]['init']['value']) == strtolower($filter['initValue'])
+                        : true
+                )
             );
         };
     }

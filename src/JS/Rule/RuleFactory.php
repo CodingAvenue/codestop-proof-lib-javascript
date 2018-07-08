@@ -22,7 +22,11 @@ class RuleFactory
         return array(
             'console'   => '\CodeStop\Proof\JS\Rule\Expression\Call\Console',
             'variable'  => '\CodeStop\Proof\JS\Rule\Variable\Variable',
-            'argument'  => '\CodeStop\Proof\JS\Rule\Argument\Argument'
+            'argument'  => '\CodeStop\Proof\JS\Rule\Argument\Argument',
+            'plus'      => '\CodeStop\Proof\JS\Rule\BinaryOperator\Plus_',
+            'greater-than' => '\CodeStop\Proof\JS\Rule\BinaryOperator\Greater',
+            'if'        => '\CodeStop\Proof\JS\Rule\Statement\If_',
+            'switch'    => '\CodeStop\Proof\JS\Rule\Statement\Switch_'
         );
     }
 }

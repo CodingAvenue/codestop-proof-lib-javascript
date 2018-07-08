@@ -29,7 +29,10 @@ class FilterFactory
         return array(
             'call-expression'   => '\CodeStop\Proof\JS\Filter\CallExpression',
             'variable'          => '\CodeStop\Proof\JS\Filter\Variable',
-            'argument'          => '\CodeStop\Proof\JS\Filter\Argument'
+            'argument'          => '\CodeStop\Proof\JS\Filter\Argument',
+            'binary-expression' => '\CodeStop\Proof\JS\Filter\BinaryExpression',
+            'if-statement'      => '\CodeStop\Proof\JS\Filter\IfStartement',
+            'switch'            => '\CodeStop\Proof\JS\Filter\Switch_'
         );
     }
 }
