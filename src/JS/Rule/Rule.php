@@ -11,7 +11,7 @@ abstract class Rule implements RuleInterface
     {
         $this->filter = $filter;
 
-        $this->checkOptionalFilter();
+        //$this->checkOptionalFilter();
     }
 
     public function applyRule(array $nodes)
