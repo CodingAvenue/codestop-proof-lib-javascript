@@ -13,6 +13,9 @@ class Variable extends Filter implements FilterInterface
 
     public function getRuleFilter()
     {
-        return $this->attributes;
+        $attr = $this->attributes;
+
+        unset($attr['name']);
+        return $attr;
     }
 }

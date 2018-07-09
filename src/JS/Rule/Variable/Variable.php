@@ -52,7 +52,7 @@ class Variable extends Rule implements RuleInterface
 
     public function allowedOptionalFilter()
     {
-        $attributes = $this->filters;
+        $attributes = $this->filter;
         unset($attributes['name']);
 
         return $attributes;
