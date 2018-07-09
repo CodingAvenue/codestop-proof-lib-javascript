@@ -28,9 +28,12 @@ class FilterFactory
     {
         return array(
             'call-expression'   => '\CodeStop\Proof\JS\Filter\CallExpression',
-            'variable'          => '\CodeStop\Proof\JS\Filter\Variable',
+            'variable-declaration' => '\CodeStop\Proof\JS\Filter\VariableDeclaration',
+            'identifier'        => '\CodeStop\Proof\JS\Filter\Identifier',
+            'literal'           => '\CodeStop\Proof\JS\Filter\Literal',
             'argument'          => '\CodeStop\Proof\JS\Filter\Argument',
             'binary-expression' => '\CodeStop\Proof\JS\Filter\BinaryExpression',
+            'assignment-expression' => '\CodeStop\Proof\JS\Filter\AssignmentExpression',
             'if-statement'      => '\CodeStop\Proof\JS\Filter\IfStartement',
             'switch'            => '\CodeStop\Proof\JS\Filter\Switch_'
         );

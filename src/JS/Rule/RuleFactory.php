@@ -21,8 +21,11 @@ class RuleFactory
     {
         return array(
             'console'   => '\CodeStop\Proof\JS\Rule\Expression\Call\Console',
-            'variable'  => '\CodeStop\Proof\JS\Rule\Variable\Variable',
+            'variable-declaration'  => '\CodeStop\Proof\JS\Rule\Variable\VariableDeclaration',
+            'identifier' => '\CodeStop\Proof\JS\Rule\Variable\Identifier',
+            'literal'   => '\CodeStop\Proof\JS\Rule\String\Literal',
             'argument'  => '\CodeStop\Proof\JS\Rule\Argument\Argument',
+            'assignment' => '\CodeStop\Proof\JS\Rule\Expression\Assignment',
             'plus'      => '\CodeStop\Proof\JS\Rule\BinaryOperator\Plus_',
             'greater-than' => '\CodeStop\Proof\JS\Rule\BinaryOperator\Greater',
             'if'        => '\CodeStop\Proof\JS\Rule\Statement\If_',

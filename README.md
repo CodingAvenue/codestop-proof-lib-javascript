@@ -11,32 +11,41 @@
 Sometimes you may just want to start searching from a subnode directly, To do that just call `getSubNode` method, pass the subnode name that you want to process only.
 
 ```js
-
 $call = $js->find('call-expression');
-$call->getSubnode('arguments'); // Will give you a new Nodes instance with just the argument subnode on it.
+$call->getSubNode('arguments'); // Will give you a new Nodes instance with just the argument subnode on it.
 ```
 
 ### Console
+
+Finding console call expression with an optional filter of the property e.g. log, error.
 
 ```js
 $node = $js->find('call-expression[name="console"]'); // Will match any console.log() console.error() calls
 
 $node = $js->find('call-expression[name="console", property="log"]'); // will match console.log() only.
+```
 
-// To search for what was passed to console.log you will need to do a new find() after the call-expression find.
+### Literal String
 
-$consoleNode = $js->find('call-expression[name="console", property="log"]');
-$consoleNode->find('argument[type="IDENTIFIER", name="x"]'); // Will match console.log(x);
-$consoleNode->find('argument[type="LITERAL", value="x"]'); // Will match console.log('x');
+Findng literal string node. You can use this for finding nodes that uses a literal string e.g. arguments passed to console.log or the initial value of a variable.
 
+```js
+$literal = $js->find('literal[value="This is a literal string"]');
 ```
 
 ### Variable
 
+Finding the Variable declaration nodes
+
 ```js
-$node = $js->find('variable[name="name"]'); // WIll match variable declaration for variable 'name' e.g. let name = 'jerome';
-$node = $js->find('variable[name="name", kind="let"]'); // WIll match variable declaration for variable 'name' using the let keyword.
-$node = $js->find('variable[name="name", initType="literal", "initValue="hello"]'); // Will match variable `let name = 'hello'`
+$node = $js->find('variable-declaration'); // Will list all variable declarations nodes
+// To find a specific variable name. You will need to get the subnode 'declarations` first
+$declarations = $node->getSubNode('declarations');
+// Now we can now find the variable name that we want. TO do this we search for an identifier
+$ident = $declarations->find('identifier[name="firstName"]'); // will find a variable declarations for variable `FirstName`
+// If you want to know the initial value of the variable, get the subnode `init` from the return value of the identifier call
+$init = $ident->getSubNode('init');
+// Now you can further test if the initial value is a literal or not.
 ```
 
 ### Argument with String Operator

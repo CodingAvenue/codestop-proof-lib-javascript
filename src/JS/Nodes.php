@@ -49,11 +49,17 @@ class Nodes
         } else {
             foreach ($this->parsed as $node) {
                 if (array_key_exists($subNode, $node)) {
-                    return new self([$node[$subNode]]);
+                    return $subNode == 'declarations'
+                        ? new self($node[$subNode])
+                        : new self([$node[$subNode]]);
+                } else if (array_key_exists('expression', $node) && array_key_exists($subNode, $node['expression'])) {
+                    return ($subNode == 'arguments')
+                        ? new self($node['expression'][$subNode])
+                        : new self([$node['expression'][$subNode]]);
                 }
             }
         }
 
-        throw new \Exception("Cannot find a subnode $subNode");
+        return new self([]);
     }
 }

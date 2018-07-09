@@ -1,0 +1,2 @@
+let message = "Good Morning!";
+console.log(message + " I am Diana Rose.");

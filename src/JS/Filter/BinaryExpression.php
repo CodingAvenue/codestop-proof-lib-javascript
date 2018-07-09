@@ -8,7 +8,7 @@ class BinaryExpression extends Filter implements FilterInterface
 {
     public function getRuleClass()
     {
-        return RuleFactory::createRule($this->getOperator(), $this>getRuleFilter());
+        return RuleFactory::createRule($this->getOperator(), $this->getRuleFilter());
     }
 
     private function getOperator()
