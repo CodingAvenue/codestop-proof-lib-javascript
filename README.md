@@ -66,7 +66,23 @@ $if = $js->find('if-statement'); // It will now return all if statement nodes.
 
 // To know what was testd and the body of the if statement, use the `getSubnode()` to get each subnode and search from their.
 
-$test = $if->getSubnode('test'); // WIll give us the test node only. The node that tests if the program should go inside the if body.
+$test = $if->getSubnode('test'); // WIll give us the test node only. The node that evaluates.
 $test->find('binary-expression[name=">", leftValue="12", rightValue="23"]'); // Will match if (12 > 23) statement.
-])
+// To go to the else or else if statement just do `$if->getSubnode('consequent')`
 ```
+
+### Switch Statement
+
+```js
+$swtich = $js->find('switch'); // Will return all switch statement nodes.
+
+//To check what is being evaluated get the `discrimant` subnode
+$discriminant = $switch->getSubNode('disriminant');
+// If you expecting a variable foo then you can do this
+$discriminant->find('variable[name="foo"]');
+
+// TO check for the cases get the `cases` sub node
+$cases = $switch->getSubNode('cases');
+// Each element of the `$cases` will have a `test` and `consequent` subnode like the `if` statement.
+```
+
