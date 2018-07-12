@@ -5,7 +5,7 @@ namespace CodeStop\Proof\JS\Rule\BinaryOperator;
 use CodeStop\Proof\JS\Rule\Rule;
 use CodeStop\Proof\JS\Rule\RuleInterface;
 
-class Greater extends Rule implements RuleInterface
+class Equals extends Rule implements RuleInterface
 {
     public function getRule(): callable
     {
@@ -14,7 +14,7 @@ class Greater extends Rule implements RuleInterface
         return function($node) use($filter) {
             return (
                 ($node['type'] == 'BinaryExpression')
-                && ($node['operator'] == '>')
+                && ($node['operator'] == '==')
             );
         };
     }

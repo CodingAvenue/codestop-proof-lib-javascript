@@ -36,7 +36,9 @@ class FilterFactory
             'assignment-expression' => '\CodeStop\Proof\JS\Filter\AssignmentExpression',
             'if-statement'      => '\CodeStop\Proof\JS\Filter\IfStatement',
             'switch'            => '\CodeStop\Proof\JS\Filter\Switch_',
-            'switch-default'    => '\CodeStop\Proof\JS\Filter\SwitchDefault'
+            'switch-default'    => '\CodeStop\Proof\JS\Filter\SwitchDefault',
+            'for-statement'     => '\CodeStop\Proof\JS\Filter\ForStatement',
+            'update-expression' => '\CodeStop\Proof\JS\Filter\UpdateExpression'
         );
     }
 }

@@ -13,12 +13,22 @@ class Assignment extends Rule implements RuleInterface
 
         return function($node) use($filter) {
             return (
-                ($node['type'] == 'ExpressionStatement')
-                && $node['expression']['type'] == 'AssignmentExpression'
-                && (
-                    isset($filter['operator'])
-                        ? $filter['operator'] == $node['expression']['operator']
-                        : true
+                (
+                    $node['type'] == 'ExpressionStatement'
+                    && $node['expression']['type'] == 'AssignmentExpression'
+                    && (
+                        isset($filter['operator'])
+                            ? $filter['operator'] == $node['expression']['operator']
+                            : true
+                    )
+                ) ||
+                (
+                    $node['type'] == 'AssignmentExpression'
+                    && (
+                        isset($filter['operator'])
+                            ? $filter['operator'] == $node['operator']
+                            : true
+                    )
                 )
             );
         };

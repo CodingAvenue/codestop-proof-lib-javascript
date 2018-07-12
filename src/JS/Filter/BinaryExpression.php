@@ -13,12 +13,22 @@ class BinaryExpression extends Filter implements FilterInterface
 
     private function getOperator()
     {
-        if ($this->attributes['name'] === '+') {
+        if ($this->attributes['operator'] === '+') {
             return 'plus';
-        } else if ($this->attributes['name'] === '>') {
+        } else if ($this->attributes['operator'] === '-') {
+            return 'minus';
+        } else if ($this->attributes['operator'] === '*') {
+            return 'mul';
+        } else if ($this->attributes['operator'] === '/') {
+            return 'div';
+        } else if ($this->attributes['operator'] === '%') {
+            return 'mod';
+        } else if ($this->attributes['operator'] === '>') {
             return 'greater-than';
-        } else if ($this->attributes['name'] === '<') {
+        } else if ($this->attributes['operator'] === '<') {
             return 'less-than';
+        } else if ($this->attributes['operator'] === '==') {
+            return 'equals';
         }
     }
 
@@ -26,7 +36,7 @@ class BinaryExpression extends Filter implements FilterInterface
     {
         $attributes = $this->attributes;
 
-        unset($attributes['name']);
+        unset($attributes['operator']);
         return $attributes;
     }
 }

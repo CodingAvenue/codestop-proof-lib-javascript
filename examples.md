@@ -97,7 +97,7 @@ to check for the if statement
 ```js
 $if = $js->find('if-statement');
 $test = $if->getSubNode('test'); // we test the 'test' subnode first
-$binary = $test->find('binary-expression[name=">"]'); // Check if it uses a binary expression to evaluate the if statement.
+$binary = $test->find('binary-expression[operator=">"]'); // Check if it uses a binary expression to evaluate the if statement.
 $left = $binary->getSubNode('left'); // Let's check the left side of the binary expression
 $var = $left->find('identifier[name="studentGrade"]'); // $var should give us a single node if it matches
 $right = $binary->getSubNode('right'); // Let's check the right side of the binary expression
@@ -191,4 +191,51 @@ $const = $cases->getSubNode('consequent'); // Will give you all case body
 $test = $cases->getSubNode('test'); // Will give you all case test
 $out = $test->find('literal[value="A"]'); // Testing if a test for a literal value 'A' is on the code
 $default = $cases->find('switch-default'); // To get the default case.
+```
+
+## Arithmetic Operators
+
+```js
+let x = 10;
+let y = 2;
+
+let z = x + y;
+z = x - y;
+z = x * y;
+z = x / y;
+z = x % y;
+```
+
+TO check for arithmetic expression
+
+```js
+$plus = $js->find('binary-expression[operator="+"]');
+$minus = $js->find('binary-expression[operator="-"]'); 
+$multiply = $js->find('binary-expression[operator="*"]'); 
+$division = $js->find('binary-expression[operator="/"]'); 
+$modulo = $js->find('binary-expression[operator="%"]'); 
+```
+
+## For Loop
+
+```js
+for (let x = 1; x > 5; x++) {
+    console.log(x);
+}
+```
+
+```js
+$for = $js->find('for-statement'); //Will give us the for loop node
+
+$init = $for->getSubNode('init'); //Will give us the init node `let x = 1` above.
+$test = $for->getSubNode('test'); // Will give us the test node `x > 5` above.
+$update = $for->getSubNode('update'); // will give us the update node `x++` above.
+
+$increment = $update->find('update-expression[operator="++"]'); // Will give us the node of using the increment operator
+
+$args = $incremnt->getSubNode('argument');
+$ident = $args->find('identifier[name="counter"]'); // Will give you the node if counter++ was use to increment the loop.
+
+$body = $for->getSubNode('body'); // Give us the body node of the for loop.
+
 ```
