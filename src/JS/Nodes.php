@@ -70,6 +70,6 @@ class Nodes
 
     public function count()
     {
-        count($this->parsed);
+        return count($this->parsed);
     }
 }
