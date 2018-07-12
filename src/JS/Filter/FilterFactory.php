@@ -11,7 +11,7 @@ namespace CodeStop\Proof\JS\Filter;
 
 class FilterFactory
 {
-    public static function createFilter(string $name, array $attributes)
+    public static function createFilter(string $name, array $attributes = array())
     {
         $filters = self::getFilters();
 
@@ -34,8 +34,9 @@ class FilterFactory
             'argument'          => '\CodeStop\Proof\JS\Filter\Argument',
             'binary-expression' => '\CodeStop\Proof\JS\Filter\BinaryExpression',
             'assignment-expression' => '\CodeStop\Proof\JS\Filter\AssignmentExpression',
-            'if-statement'      => '\CodeStop\Proof\JS\Filter\IfStartement',
-            'switch'            => '\CodeStop\Proof\JS\Filter\Switch_'
+            'if-statement'      => '\CodeStop\Proof\JS\Filter\IfStatement',
+            'switch'            => '\CodeStop\Proof\JS\Filter\Switch_',
+            'switch-default'    => '\CodeStop\Proof\JS\Filter\SwitchDefault'
         );
     }
 }

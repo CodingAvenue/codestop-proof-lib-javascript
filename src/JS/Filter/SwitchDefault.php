@@ -4,11 +4,11 @@ namespace CodeStop\Proof\JS\Filter;
 
 use CodeStop\Proof\JS\Rule\RuleFactory;
 
-class IfStatement extends Filter implements FilterInterface
+class SwitchDefault extends Filter implements FilterInterface
 {
     public function getRuleClass()
     {
-        return RuleFactory::createRule('if', $this->getRuleFilter());
+        return RuleFactory::createRule('switch-default', $this->getRuleFilter());
     }
 
     public function getRuleFilter()

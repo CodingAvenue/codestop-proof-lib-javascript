@@ -42,24 +42,34 @@ class Nodes
         return $transformer->transform();
     }
 
-    public function getSubNode(string $subNode)
+    public function getSubNode(string $subNode, bool $is_empty = false)
     {
         if (array_key_exists($subNode, $this->parsed)) {
             return new self([$this->parsed[$subNode]]);
         } else {
+            $nodes = array();
             foreach ($this->parsed as $node) {
-                if (array_key_exists($subNode, $node)) {
-                    return $subNode == 'declarations'
-                        ? new self($node[$subNode])
-                        : new self([$node[$subNode]]);
-                } else if (array_key_exists('expression', $node) && array_key_exists($subNode, $node['expression'])) {
-                    return ($subNode == 'arguments')
-                        ? new self($node['expression'][$subNode])
-                        : new self([$node['expression'][$subNode]]);
+                if (array_key_exists($subNode, $node) && is_array($node[$subNode])) {
+                    if ($subNode == 'declarations' || $subNode == 'body' || $subNode == 'cases') {
+                        $nodes = array_merge($nodes, $node[$subNode]);
+                    } else {
+                        $nodes[] = $node[$subNode];
+                    }
+                } else if (array_key_exists('expression', $node) && array_key_exists($subNode, $node['expression']) && is_array($node['expression'][$subNode])) {
+                    if ($subNode == 'arguments') {
+                        $nodes = array_merge($nodes, $node['expression'][$subNode]);
+                    } else {
+                        $nodes[] = $node['expression'][$subNode];
+                    }
                 }
             }
         }
 
-        return new self([]);
+        return new self($nodes);
+    }
+
+    public function count()
+    {
+        count($this->parsed);
     }
 }

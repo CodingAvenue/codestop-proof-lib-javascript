@@ -1,2 +1,4 @@
-let message = "Good Morning!";
-console.log(message + " I am Diana Rose.");
+let x = 1;
+let y = 2;
+
+z = x ) y;

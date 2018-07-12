@@ -80,3 +80,115 @@ $message = $left->find('identifier[name="message"]');
 $right = $exp->getSubNode('right');
 $literal = $right->find('literal[value=" I am Diana Rose."]');
 ```
+
+## If Statement
+
+given the following code
+
+```js
+let studentGrade = 80;
+if (studentGrade > 75) {
+    console.log("Congratulations! You have passed the final assessment.");
+}
+```
+
+to check for the if statement
+
+```js
+$if = $js->find('if-statement');
+$test = $if->getSubNode('test'); // we test the 'test' subnode first
+$binary = $test->find('binary-expression[name=">"]'); // Check if it uses a binary expression to evaluate the if statement.
+$left = $binary->getSubNode('left'); // Let's check the left side of the binary expression
+$var = $left->find('identifier[name="studentGrade"]'); // $var should give us a single node if it matches
+$right = $binary->getSubNode('right'); // Let's check the right side of the binary expression
+$literal = $right->find('literal[value="75"]');
+
+$consequent = $if->getSubNode('consequent'); // Get the consequent node of if statement
+$body = $consequent->getSubNode('body'); // Get the body node
+
+$console = $body->find('call-expression[name="console", property="log"]');
+$args = $console->getSubNode('arguments');
+$literal = $args->find('literal[value="Congratulations! You have passed the final assessment"]');
+```
+
+With an else statement
+
+```js
+let studentGrade = 80;
+if (studentGrade > 75) {
+    console.log("Congratulations! You have passed the final assessment.");
+} else {
+    console.log("Sorry! Try again.");
+}
+```
+
+To get check the else statement
+
+```js
+$if = $js->find('if-statement');
+$alternate = $if->getSubNode('alternate');
+$body = $alternate->getSubNode('body');
+$console = $body->find('call-expression[name="console", property="log"]');
+$args = $console->getSubNode('arguments');
+$literal = $args->find('literal[value="Sorry! Try again."]');
+```
+
+With else if statement
+
+```js
+let studentGrade = 80;
+if (studentGrade > 75) {
+    console.log("Congratulations! You have passed the final assessment.");
+} else if (studentGrade < 75) {
+    console.log("Sorry! Try again.");
+} else {
+    console.log("You made it! Let's celebrate!");
+}
+```
+
+```js
+$if = $js->find('if-statement');
+$alternate = $if->getSubNode('alternate');
+$test = $alternate->getSubNode('test'); // Checking the test node
+$consequent = $alternate->getSubNode('consequent'); // The else if statement body block
+$consBody = $consequent->getSubNode('body'); // The actual body of the else if statement
+$alternate = $alternate->getSubNode('alternate'); // The else statement block.
+```
+
+## Switch Statement
+
+Given this switch code
+
+```js
+let studentGrade = 'C';
+
+switch (studentGrade) {
+    case 'A':
+        remarks = "Excellent";
+        break;
+    case 'B':
+        remarks = "Very Good";
+        break;
+    case 'C':
+        remarks = "Good";
+        break;
+    case 'D':
+        remarks = "Needs Improvement";
+        break;
+    default:
+        remarks = "Invalid input. Please try again.";
+        break;
+}
+console.log("Your grade is: " + studentGrade + ". Remarks: " + remarks);
+```
+
+To check for the switch statements
+
+```js
+$switch = $js->find('switch'); // Give you the switch node
+$cases = $switch->getSubNode('cases'); // Return all case statements 
+$const = $cases->getSubNode('consequent'); // Will give you all case body
+$test = $cases->getSubNode('test'); // Will give you all case test
+$out = $test->find('literal[value="A"]'); // Testing if a test for a literal value 'A' is on the code
+$default = $cases->find('switch-default'); // To get the default case.
+```

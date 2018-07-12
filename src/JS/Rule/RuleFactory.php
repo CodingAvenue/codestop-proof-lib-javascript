@@ -29,7 +29,8 @@ class RuleFactory
             'plus'      => '\CodeStop\Proof\JS\Rule\BinaryOperator\Plus_',
             'greater-than' => '\CodeStop\Proof\JS\Rule\BinaryOperator\Greater',
             'if'        => '\CodeStop\Proof\JS\Rule\Statement\If_',
-            'switch'    => '\CodeStop\Proof\JS\Rule\Statement\Switch_'
+            'switch'    => '\CodeStop\Proof\JS\Rule\Statement\Switch_',
+            'switch-default' => '\CodeStop\Proof\JS\Rule\Statement\SwitchDefault'
         );
     }
 }

@@ -25,6 +25,6 @@ class Literal extends Rule implements RuleInterface
 
     public function allowedOptionalFilter()
     {
-        return array('type', 'value');
+        return array('type', 'value', 'quoted');
     }
 }

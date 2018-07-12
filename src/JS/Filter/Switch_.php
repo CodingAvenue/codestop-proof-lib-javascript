@@ -13,6 +13,6 @@ class Switch_ extends Filter implements FilterInterface
 
     public function getRuleFilter()
     {
-        return $this->attribute;
+        return $this->attributes;
     }
 }
