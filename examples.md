@@ -239,3 +239,75 @@ $ident = $args->find('identifier[name="counter"]'); // Will give you the node if
 $body = $for->getSubNode('body'); // Give us the body node of the for loop.
 
 ```
+
+## While Loop
+
+```js
+let counter = 0;
+while (counter < 5) {
+    console.log("Hello World!");
+    counter++;
+}
+```
+
+```php
+$while = $js->find('while-statement'); // Will give us the while loop node.
+
+$test = $while->getSubNode('test'); // Will give us the test node `counter < 5` above.
+$body = $while->getSubNode('bod'); // Will give us the body node of the while loop.
+```
+## Function Declaration
+
+```js
+function writeMessage(message) {
+    console.log("Hello World!");	
+}
+
+writeMessage();
+```
+
+```php
+$func = $js->find('function-declaration'); // Will give us all function declaration nodes.
+
+$func = $js->find('function-declaration[name="writeMessage"]'); // Will only give us the function declaration whose function name is `writeMessage`.
+
+$params = $func->getSubNode('params'); // Will give us the function signature parameters if one is given.
+$body = $func->getSubNode('body'); // Will give us the function body.
+
+$call = $js->find('call-expression[name="writeMessage"]'); // Will match the node that calls the function `writeMessage`
+```
+
+## Arrow Function
+
+```js
+let takeOrder = () => {
+  console.log("You order: pizza");
+};
+
+takeOrder();
+```
+
+```php
+$variable = $js->find('variable-declaration'); // give us the variable declaration node.
+$declarations = $variable->getSubNode('delcarations'); // Will give us the declaration node of the variable
+$init = $declarations->getSubNode('init'); // Will give us the init node.
+
+$arrow = $init->find('arrow-function'); // Will give us the arrow function node.
+
+$params = $arrow->getSubNode('params'); // Will give us the node of params.
+$body = $arrow->getSubNode('body'); // Give us the body node of the arrow function.
+```
+
+## Built-in methods
+
+```js
+let number = 14.756335;
+console.log(Math.round(number));
+```
+
+```php
+$console = $js->find('call-expression[name="console", property="log"]'); // Will give us the console node.
+$arguments = $console->getSubNode('arguments'); // Will give us the argument node of the console node.
+
+$math = $arguments->find('call-expression[name="Math", property="round"]'); // Will give us the Math.round node.
+```

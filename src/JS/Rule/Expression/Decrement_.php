@@ -20,7 +20,7 @@ class Decrement_ extends Rule implements RuleInterface
                 ) ||
                 (
                     $node['type'] == 'UpdateExpression'
-                    && $node['opeartor'] == '--'
+                    && $node['operator'] == '--'
                 )
             );
         };

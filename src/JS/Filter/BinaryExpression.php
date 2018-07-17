@@ -29,6 +29,12 @@ class BinaryExpression extends Filter implements FilterInterface
             return 'less-than';
         } else if ($this->attributes['operator'] === '==') {
             return 'equals';
+        } else if ($this->attributes['operator'] === '<=') {
+            return 'less-equal';
+        } else if ($this->attributes['operator'] === '>=') {
+            return 'greater-equal';
+        } else {
+            throw new \Exception("Unknown operator {$this->attributes['operator']} ");
         }
     }
 

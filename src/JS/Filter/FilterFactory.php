@@ -28,17 +28,20 @@ class FilterFactory
     {
         return array(
             'call-expression'   => '\CodeStop\Proof\JS\Filter\CallExpression',
-            'variable-declaration' => '\CodeStop\Proof\JS\Filter\VariableDeclaration',
+            'binary-expression' => '\CodeStop\Proof\JS\Filter\BinaryExpression',
+            'assignment-expression' => '\CodeStop\Proof\JS\Filter\AssignmentExpression',
+            'update-expression' => '\CodeStop\Proof\JS\Filter\UpdateExpression',
             'identifier'        => '\CodeStop\Proof\JS\Filter\Identifier',
             'literal'           => '\CodeStop\Proof\JS\Filter\Literal',
             'argument'          => '\CodeStop\Proof\JS\Filter\Argument',
-            'binary-expression' => '\CodeStop\Proof\JS\Filter\BinaryExpression',
-            'assignment-expression' => '\CodeStop\Proof\JS\Filter\AssignmentExpression',
+            'variable-declaration' => '\CodeStop\Proof\JS\Filter\VariableDeclaration',
+            'function-declaration' => '\CodeStop\Proof\JS\Filter\FunctionDeclaration',
+            'arrow-function'       => '\CodeStop\Proof\JS\Filter\ArrowFunction',
             'if-statement'      => '\CodeStop\Proof\JS\Filter\IfStatement',
             'switch'            => '\CodeStop\Proof\JS\Filter\Switch_',
             'switch-default'    => '\CodeStop\Proof\JS\Filter\SwitchDefault',
             'for-statement'     => '\CodeStop\Proof\JS\Filter\ForStatement',
-            'update-expression' => '\CodeStop\Proof\JS\Filter\UpdateExpression'
+            'while-statement'   => '\CodeStop\Proof\JS\Filter\WhileStatement'
         );
     }
 }
