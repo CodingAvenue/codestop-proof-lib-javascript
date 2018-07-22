@@ -191,6 +191,13 @@ $const = $cases->getSubNode('consequent'); // Will give you all case body
 $test = $cases->getSubNode('test'); // Will give you all case test
 $out = $test->find('literal[value="A"]'); // Testing if a test for a literal value 'A' is on the code
 $default = $cases->find('switch-default'); // To get the default case.
+
+// TO check for break statements.
+$switch = $js->find('switch');
+$cases = $switch->getSubNode('cases');
+$const = $cases->getSubNode('consequent');
+$const0 = $const->getSubIndex(0); // This will give us the first switch consequent statement ( body of the switch statement)
+$br0 = $const0->find('break'); // Will give us the first break statement. 
 ```
 
 ## Arithmetic Operators
@@ -254,8 +261,18 @@ while (counter < 5) {
 $while = $js->find('while-statement'); // Will give us the while loop node.
 
 $test = $while->getSubNode('test'); // Will give us the test node `counter < 5` above.
-$body = $while->getSubNode('bod'); // Will give us the body node of the while loop.
+$body = $while->getSubNode('body'); // Will give us the body node of the while loop.
 ```
+
+## Return and Continue
+
+To get the `return` and `continue` node
+
+```php
+$return = $js->find('return');
+$continue = $js->find('continue');
+```
+
 ## Function Declaration
 
 ```js
@@ -277,6 +294,25 @@ $body = $func->getSubNode('body'); // Will give us the function body.
 $call = $js->find('call-expression[name="writeMessage"]'); // Will match the node that calls the function `writeMessage`
 ```
 
+## Function Expression
+
+```js
+let message = function greeting() {
+    console.log("Hello, world.");
+};
+
+message();
+```
+
+```php
+$variable = $js->find('variable-declaration'); // We get the variable declaration node.
+$declarations = $variable->getSubNode('declarations'); // We get the subnode that we needed
+$init = $declarations->getSubNode('init'); // We get the init node since it's what we want to know if it's a function expression
+
+$func = $init->find('function-expression'); // Will give us a function expression node.
+$func = $init->find('function-expression[name="foo"]'); // Will give us a function expression node whose identifier is called `foo`.
+```
+
 ## Arrow Function
 
 ```js
@@ -289,7 +325,7 @@ takeOrder();
 
 ```php
 $variable = $js->find('variable-declaration'); // give us the variable declaration node.
-$declarations = $variable->getSubNode('delcarations'); // Will give us the declaration node of the variable
+$declarations = $variable->getSubNode('declarations'); // Will give us the declaration node of the variable
 $init = $declarations->getSubNode('init'); // Will give us the init node.
 
 $arrow = $init->find('arrow-function'); // Will give us the arrow function node.

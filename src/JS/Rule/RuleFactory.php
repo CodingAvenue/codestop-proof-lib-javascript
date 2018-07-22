@@ -44,8 +44,12 @@ class RuleFactory
             'switch-default' => '\CodeStop\Proof\JS\Rule\Statement\SwitchDefault',
             'for-statement' => '\CodeStop\Proof\JS\Rule\Statement\For_',
             'while-statement' => '\CodeStop\Proof\JS\Rule\Statement\While_',
+            'break'         => '\CodeStop\Proof\JS\Rule\Statement\Break_',
+            'return'        => '\CodeStop\Proof\JS\Rule\Statement\Return_',
+            'continue'      => '\CodeStop\Proof\JS\Rule\Statement\Continue_',
             'function-declaration' => '\CodeStop\Proof\JS\Rule\Function_\FunctionDeclaration',
-            'arrow-function'    => '\CodeStop\Proof\JS\Rule\Function_\ArrowFunction'
+            'arrow-function'    => '\CodeStop\Proof\JS\Rule\Function_\ArrowFunction',
+            'function-expression' => '\CodeStop\Proof\JS\Rule\Function_\FunctionExpression'
         );
     }
 }

@@ -53,7 +53,11 @@ class Nodes
                     if ($subNode == 'declarations' || $subNode == 'body' || $subNode == 'cases') {
                         $nodes = array_merge($nodes, $node[$subNode]);
                     } else {
-                        $nodes[] = $node[$subNode];
+                        if ($subNode == 'arguments') {
+                            $nodes = array_merge($nodes, $node[$subNode]);
+                        } else {
+                            $nodes[] = $node[$subNode];
+                        }
                     }
                 } else if (array_key_exists('expression', $node) && array_key_exists($subNode, $node['expression']) && is_array($node['expression'][$subNode])) {
                     if ($subNode == 'arguments') {
@@ -66,6 +70,15 @@ class Nodes
         }
 
         return new self($nodes);
+    }
+
+    public function getSubIndex(int $index)
+    {
+        if ($index > (count($this->parsed) - 1)) {
+            throw new \Exception("Can't find a subnode for Index {$index}");
+        }
+
+        return new self($this->parsed[$index]);
     }
 
     public function count()

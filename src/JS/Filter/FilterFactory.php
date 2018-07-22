@@ -36,10 +36,14 @@ class FilterFactory
             'argument'          => '\CodeStop\Proof\JS\Filter\Argument',
             'variable-declaration' => '\CodeStop\Proof\JS\Filter\VariableDeclaration',
             'function-declaration' => '\CodeStop\Proof\JS\Filter\FunctionDeclaration',
+            'function-expression' => '\CodeStop\Proof\JS\Filter\FunctionExpression',
             'arrow-function'       => '\CodeStop\Proof\JS\Filter\ArrowFunction',
             'if-statement'      => '\CodeStop\Proof\JS\Filter\IfStatement',
             'switch'            => '\CodeStop\Proof\JS\Filter\Switch_',
             'switch-default'    => '\CodeStop\Proof\JS\Filter\SwitchDefault',
+            'break'             => '\CodeStop\Proof\JS\Filter\BreakStatement',
+            'continue'          => '\CodeStop\Proof\JS\Filter\ContinueStatement',
+            'return'            => '\CodeStop\Proof\JS\Filter\ReturnStatement',
             'for-statement'     => '\CodeStop\Proof\JS\Filter\ForStatement',
             'while-statement'   => '\CodeStop\Proof\JS\Filter\WhileStatement'
         );
