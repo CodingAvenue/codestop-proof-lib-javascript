@@ -37,6 +37,7 @@ class FilterFactory
             'variable-declaration' => '\CodeStop\Proof\JS\Filter\VariableDeclaration',
             'function-declaration' => '\CodeStop\Proof\JS\Filter\FunctionDeclaration',
             'function-expression' => '\CodeStop\Proof\JS\Filter\FunctionExpression',
+            'unary-expression'  => '\CodeStop\Proof\JS\Filter\UnaryExpression',
             'arrow-function'       => '\CodeStop\Proof\JS\Filter\ArrowFunction',
             'if-statement'      => '\CodeStop\Proof\JS\Filter\IfStatement',
             'switch'            => '\CodeStop\Proof\JS\Filter\Switch_',

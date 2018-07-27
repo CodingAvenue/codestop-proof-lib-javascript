@@ -347,3 +347,17 @@ $arguments = $console->getSubNode('arguments'); // Will give us the argument nod
 
 $math = $arguments->find('call-expression[name="Math", property="round"]'); // Will give us the Math.round node.
 ```
+
+## Unary operator
+```js
+let number = -14.45;
+let result = Math.abs(number);
+console.log("The absolute value of " + number + " is " + result + ".");
+```
+
+```php
+$var = $js->find('variable-declaration');
+$dec = $var->getSubNode('declarations');
+$init = $dec->getSubNode('init');
+$unary = $init->find('unary-expression'); // Should give you the nodes of unary expression.
+```

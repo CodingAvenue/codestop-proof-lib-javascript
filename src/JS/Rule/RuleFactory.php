@@ -49,7 +49,8 @@ class RuleFactory
             'continue'      => '\CodeStop\Proof\JS\Rule\Statement\Continue_',
             'function-declaration' => '\CodeStop\Proof\JS\Rule\Function_\FunctionDeclaration',
             'arrow-function'    => '\CodeStop\Proof\JS\Rule\Function_\ArrowFunction',
-            'function-expression' => '\CodeStop\Proof\JS\Rule\Function_\FunctionExpression'
+            'function-expression' => '\CodeStop\Proof\JS\Rule\Function_\FunctionExpression',
+            'unary-expression'  => '\CodeStop\Proof\JS\Rule\Expression\UnaryExpression'
         );
     }
 }
