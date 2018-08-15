@@ -78,7 +78,7 @@ class Nodes
             throw new \Exception("Can't find a subnode for Index {$index}");
         }
 
-        return new self($this->parsed[$index]);
+        return new self(array($this->parsed[$index]));
     }
 
     public function count()
