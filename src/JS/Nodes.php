@@ -53,7 +53,7 @@ class Nodes
                     if ($subNode == 'declarations' || $subNode == 'body' || $subNode == 'cases') {
                         $nodes = array_merge($nodes, $node[$subNode]);
                     } else {
-                        if ($subNode == 'arguments') {
+                        if ($subNode == 'arguments' || 'params') {
                             $nodes = array_merge($nodes, $node[$subNode]);
                         } else {
                             $nodes[] = $node[$subNode];
