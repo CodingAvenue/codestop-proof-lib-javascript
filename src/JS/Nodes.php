@@ -78,7 +78,17 @@ class Nodes
             throw new \Exception("Can't find a subnode for Index {$index}");
         }
 
-        return new self(array($this->parsed[$index]));
+        if ($this->isAssoc($this->parsed[$index])) {
+            return new self(array($this->parsed[$index]));
+        } else {
+            return new self($this->parsed[$index]);
+        }
+
+    }
+
+    private function isAssoc(array $arr) 
+    {
+        return count(array_filter(array_keys($arr), 'is_string')) > 0;
     }
 
     public function count()
