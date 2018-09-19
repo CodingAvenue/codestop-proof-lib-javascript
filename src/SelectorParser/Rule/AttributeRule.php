@@ -38,8 +38,10 @@ class AttributeRule implements RuleInterface
 
         $token = $stream->getNextToken(); //We move the cursor to the next Token ignoring the open bracket since we don't want that on the result
 
-        $attributeValue = '';
         $attribute = array();
+        $keyMode = true;
+        $attrKey = '';
+        $attrVal = '';
 
         while(!$stream->isEnd()) {
             $token = $stream->getCurrentToken();
@@ -47,7 +49,44 @@ class AttributeRule implements RuleInterface
                 break;
             }
 
-            $attributeValue .= $token->getValue();            
+            if ($keyMode) {
+                if ($token->getValue() === "=") {
+                    // End of key
+                    $attribute[$attrKey] = '';
+                    $keyMode = false;
+                }
+                else {
+                    $attrKey .= $token->getValue();
+                }
+            } else {
+                if ($token->getType() === "quote") {
+                    $nextToken = $stream->peekNextToken();
+                    if (is_null($nextToken) || $nextToken->getType() === 'close_square_bracket' || $nextToken->getType() === "comma") {
+                        // End of attr value.
+                        $attribute[$attrKey] = $attrVal;
+                        $attrKey = '';
+                        $attrVal = '';
+                        $keyMode = true;
+                        while (!$stream->isEnd()) {
+                            $tok = $stream->peekNextToken();
+                            if ($this->endToken($tok)) {
+                                break;
+                            }
+
+                            if ($tok->getValue() === 'string') {
+                                break;
+                            }
+
+                            $toks = $stream->getNextToken();
+                        }
+                    } else {
+                        $attrVal .= strlen($attrVal) == 0 ? '' : $token->getValue();
+                    }
+                } else {
+                    $attrVal .= $token->getValue();
+                }
+            }
+
             $token = $stream->getNextToken();
         }
 
@@ -56,13 +95,7 @@ class AttributeRule implements RuleInterface
             throw new \Exception("Expecting an close_square_bracket_token before the end of the stream");
         }
 
-        $token = $stream->getNextToken(); // Move the stream cursor one more time since we don't want the next rule to check the closing bracket
-
-        preg_match_all('#(\w+)=(["\'])([^"\']+)\2#', $attributeValue, $attrs);
-        //$attrs = preg_split("/,\s*/", $attributeValue);
-        foreach ($attrs[1] as $index => $key) {
-            $attribute[$key] = $attrs[3][$index];
-        }
+        $stream->getNextToken();
 
         return $attribute;
     }
