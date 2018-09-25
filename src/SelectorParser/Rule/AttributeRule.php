@@ -61,7 +61,7 @@ class AttributeRule implements RuleInterface
             } else {
                 if ($token->getType() === "quote") {
                     $nextToken = $stream->peekNextToken();
-                    if (is_null($nextToken) || $nextToken->getType() === 'close_square_bracket' || $nextToken->getType() === "comma") {
+                    if (is_null($nextToken) || $nextToken->getType() === 'close_square_bracket' || ($nextToken->getType() === "comma" && strlen($attrVal) != 0)) {
                         // End of attr value.
                         $attribute[$attrKey] = $attrVal;
                         $attrKey = '';
