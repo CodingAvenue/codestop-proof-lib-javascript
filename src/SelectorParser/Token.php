@@ -24,4 +24,9 @@ class Token
     {
         return $this->value;
     }
+
+    public function isStringDanger()
+    {
+        return ($this->type === 'quote' || $this->type === 'comma');
+    }
 }

@@ -13,6 +13,7 @@ use CodeStop\Proof\SelectorParser\Handler\QuoteHandler;
 use CodeStop\Proof\SelectorParser\Handler\EqualHandler;
 use CodeStop\Proof\SelectorParser\Handler\CommaHandler;
 use CodeStop\Proof\SelectorParser\Handler\StringHandler;
+use CodeStop\Proof\SelectorParser\Handler\EscapeHandler;
 
 /**
  * SelectParser - Tokenizer of a selector string
@@ -41,6 +42,7 @@ class Parser
             ->addHandler(new QuoteHandler())
             ->addHandler(new EqualHandler())
             ->addHandler(new CommaHandler())
+            ->addHandler(new EscapeHandler())
             ->addHandler(new StringHandler());
     }
 

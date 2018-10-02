@@ -42,6 +42,7 @@ class AttributeRule implements RuleInterface
         $keyMode = true;
         $attrKey = '';
         $attrVal = '';
+        $firstValTok = false;
 
         while(!$stream->isEnd()) {
             $token = $stream->getCurrentToken();
@@ -54,6 +55,7 @@ class AttributeRule implements RuleInterface
                     // End of key
                     $attribute[$attrKey] = '';
                     $keyMode = false;
+                    $firstValTok = true;
                 }
                 else {
                     $attrKey .= $token->getValue();
@@ -61,7 +63,7 @@ class AttributeRule implements RuleInterface
             } else {
                 if ($token->getType() === "quote") {
                     $nextToken = $stream->peekNextToken();
-                    if (is_null($nextToken) || $nextToken->getType() === 'close_square_bracket' || ($nextToken->getType() === "comma" && strlen($attrVal) != 0)) {
+                    if (is_null($nextToken) || $nextToken->getType() === 'close_square_bracket' || ($nextToken->isStringDanger() && !$firstValTok)) {
                         // End of attr value.
                         $attribute[$attrKey] = $attrVal;
                         $attrKey = '';
@@ -80,11 +82,13 @@ class AttributeRule implements RuleInterface
                             $toks = $stream->getNextToken();
                         }
                     } else {
-                        $attrVal .= strlen($attrVal) == 0 ? '' : $token->getValue();
+                        $attrVal .= $firstValTok ? '' : $token->getValue();
                     }
                 } else {
                     $attrVal .= $token->getValue();
                 }
+
+                $firstValTok = false;
             }
 
             $token = $stream->getNextToken();

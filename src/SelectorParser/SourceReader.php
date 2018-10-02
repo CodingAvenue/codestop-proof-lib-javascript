@@ -42,6 +42,11 @@ class SourceReader
         return substr($this->source, $this->position, 1);
     }
 
+    public function getNextChar()
+    {
+        return substr($this->source, $this->position + 1, 1);
+    }
+
     public function movePosition(int $length)
     {
         if ($this->getRemainingLength() < $length) {
